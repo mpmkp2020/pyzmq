@@ -291,9 +291,9 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
 @task
 def release(ctx, vs, upload=False):
     """Release pyzmq"""
-    print("Value of CTX:".format(ctx))
-    print("Value of VS:".format(vs))
-    print("Value of UPLOAD:".format(upload))
+    print("Value of CTX: %s" % (ctx))
+    print("Value of VS: %s" % (vs))
+    print("Value of UPLOAD: %s" % (upload))
     print("When AppVeyor finished building, upload artifacts with:")
     # Ensure all our Pythons exist before we start:
     for v, path in py_exes.items():
