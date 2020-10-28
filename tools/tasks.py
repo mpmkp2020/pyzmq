@@ -35,7 +35,7 @@ libsodium_version = '1.0.18'
 
 pjoin = os.path.join
 
-repo = 'https://github.com/zeromq/pyzmq'
+repo = 'https://github.com/mpmkp2020/pyzmq'
 branch = os.getenv('PYZMQ_BRANCH', 'master')
 if platform.processor() != 'aarch64' and platform.processor() != 'x86_64':
     sdkroot = os.getenv("SDKROOT")
