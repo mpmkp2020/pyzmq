@@ -319,6 +319,8 @@ def release(ctx, vs, upload=False):
         for v in py_exes:
             print("Printing PWD")
             run(['pwd'])
+            print("------------------")
+            run(['ls', '-l'])
             print("Printed PWD")
             bdist(ctx, v, wheel=True)
         if upload:
