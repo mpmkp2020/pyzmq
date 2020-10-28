@@ -196,6 +196,7 @@ def build_sdist(py, upload=False):
         run(cmd)
         if upload:
             py = make_env(py, 'twine')
+            run(['apt-get', '-y install', 'libzmq3-dev'])
             run(['ls', '-l', 'dist/*'])
             run(['twine', 'upload', 'dist/*'])
 
