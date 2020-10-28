@@ -287,7 +287,8 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
         else:
             run(base_cmd +  " quay.io/pypa/manylinux1_x86_64 /io/build_pyzmqs.sh")
     if upload:
-        run(['ls', '-l', os.path.join(manylinux, 'wheelhouse', '*')])
+        run(['pwd'])
+        run(['ls', '-l'])
         run(['ls', '-l', 'wheelhouse/*'])
         py = make_env(default_py, 'twine')
         run(['twine', 'upload', os.path.join(manylinux, 'wheelhouse', '*')])
