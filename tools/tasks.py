@@ -290,7 +290,7 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
         with cd(manylinux):
             run(['pwd'])
             run(['ls', '-l'])
-            run(['ls', '-l', 'wheelhouse/*'])
+            run(['ls', '-l', 'wheelhouse'])
             py = make_env(default_py, 'twine')
             run(['twine', 'upload', os.path.join(manylinux, 'wheelhouse', '*')])
 
