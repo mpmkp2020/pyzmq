@@ -312,6 +312,7 @@ def release(ctx, vs, upload=False):
             bdist(ctx, v, wheel=True)
         if upload:
             py = make_env(default_py, 'twine')
+            run(['ls', '-l', 'dist/*'])
             run(['twine', 'upload', 'dist/*'])
 
     manylinux(ctx, vs, upload=upload)
