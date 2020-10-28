@@ -193,7 +193,7 @@ def build_sdist(py, upload=False):
     """
     with cd(repo_root):
         cmd = [py, 'setup.py', 'sdist']
-        run(['apt-get', 'install -y', 'libzmq3-dev'])
+        run(['sudo apt-get install -y libzmq3-dev'])
         run(cmd)
         if upload:
             py = make_env(py, 'twine')
