@@ -194,6 +194,7 @@ def build_sdist(py, upload=False):
     with cd(repo_root):
         cmd = [py, 'setup.py', 'sdist']
         run(cmd)
+        run(['pip', 'install', '-y', 'twine'])
         if upload:
             run(['ls', '-l'])
             run(['ls', 'dist'])
