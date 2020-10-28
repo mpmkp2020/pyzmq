@@ -284,10 +284,8 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
             run(base_cmd +  " quay.io/pypa/manylinux1_i686 linux32 /io/build_pyzmqs.sh")
         elif platform.processor() == 'aarch64':
             run(base_cmd +  " quay.io/pypa/manylinux2014_aarch64 /io/build_pyzmqs.sh")
-            run(['unzip', '/tmp/manylinux-builds/wheelhouse/*.whl'])
         else:
             run(base_cmd +  " quay.io/pypa/manylinux1_x86_64 /io/build_pyzmqs.sh")
-            run(['unzip', '/tmp/manylinux-builds/wheelhouse/*.whl'])
     if upload:
         run(['ls', '-l', os.path.join(manylinux, 'wheelhouse', '*')])
         run(['ls', '-l', 'wheelhouse/*'])
