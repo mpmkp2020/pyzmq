@@ -56,7 +56,7 @@ matrix:
       env: ZMQ=
       arch: arm64
       script: 
-        - cd tools && invoke release 19.0.2 --upload
+        - cd tools && invoke release 20.0.0 --upload
         #- cd ../ && travis_retry python setup.py test
         
 script: travis_retry python setup.py test        
