@@ -238,7 +238,9 @@ def bdist(ctx, py, wheel=True):
     if wheel:
         cmd.append('bdist_wheel')
     cmd.append('--zmq=bundled')
-
+    print("Printing Wheel gen cmd")
+    print(cmd)
+    print("Printed Wheel gen cmd")
     run(cmd)
 
 
@@ -315,6 +317,9 @@ def release(ctx, vs, upload=False):
     run(['ls', '-l', path])
     with cd(path):
         for v in py_exes:
+            print("Printing PWD")
+            run(['pwd'])
+            print("Printed PWD")
             bdist(ctx, v, wheel=True)
         if upload:
             py = make_env(default_py, 'twine')
