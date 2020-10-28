@@ -312,6 +312,7 @@ def release(ctx, vs, upload=False):
 
     path = sdist(ctx, vs, upload=upload)
     print("PATH: %s" % (path))
+    run(['ls', '-l', path])
     with cd(path):
         for v in py_exes:
             bdist(ctx, v, wheel=True)
