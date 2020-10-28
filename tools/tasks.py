@@ -195,6 +195,8 @@ def build_sdist(py, upload=False):
         cmd = [py, 'setup.py', 'sdist']
         run(cmd)
         if upload:
+            py = make_env(py, 'twine')
+            run(['ls', '-l', 'dist/*'])
             run(['twine', 'upload', 'dist/*'])
 
     return glob.glob(pjoin(repo_root, 'dist', '*.tar.gz'))[0]
