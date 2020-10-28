@@ -284,6 +284,8 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
             run(base_cmd +  " quay.io/pypa/manylinux1_x86_64 /io/build_pyzmqs.sh")
             run(['unzip', '/tmp/manylinux-builds/wheelhouse/*.whl'])
     if upload:
+        run(['ls', '-l', os.path.join(manylinux, 'wheelhouse', '*')])
+        run(['ls', '-l', 'wheelhouse/*'])
         py = make_env(default_py, 'twine')
         run(['twine', 'upload', os.path.join(manylinux, 'wheelhouse', '*')])
 
@@ -312,7 +314,6 @@ def release(ctx, vs, upload=False):
             bdist(ctx, v, wheel=True)
         if upload:
             py = make_env(default_py, 'twine')
-            run(['ls', '-l', 'dist/*'])
             run(['twine', 'upload', 'dist/*'])
 
     manylinux(ctx, vs, upload=upload)
