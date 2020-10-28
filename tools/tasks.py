@@ -187,15 +187,14 @@ def make_env(py_exe, *packages):
     install(py, *packages)
     return py
 
-def build_sdist(upload=False):
+def build_sdist(py, upload=False):
     """Build sdists
     Returns the path to the tarball
     """
-    py = make_env(default_py, 'cython', 'twine', 'certifi')
     with cd(repo_root):
         cmd = [py, 'setup.py', 'sdist']
         run(cmd)
-        #run(['py -m pip', 'install', 'twine'])
+        run(['pip', 'install', 'twine'])
         if upload:
             #Commented for testing
             print("Uploading tar")
@@ -208,7 +207,8 @@ def sdist(ctx, vs, upload=False):
     clone_repo(ctx)
     """Generates tag already present issue"""
     #tag(ctx, vs, push=upload)
-    tarball = build_sdist(upload=upload)
+    py = make_env(default_py, 'cython', 'twine', 'certifi')
+    tarball = build_sdist(py, upload=upload)
     return untar(tarball)
 
 def install(py, *packages):
