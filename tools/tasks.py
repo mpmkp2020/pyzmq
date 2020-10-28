@@ -311,7 +311,7 @@ def release(ctx, vs, upload=False):
         shutil.rmtree(env_root)
 
     path = sdist(ctx, vs, upload=upload)
-
+    print("PATH: %s" % (path))
     with cd(path):
         for v in py_exes:
             bdist(ctx, v, wheel=True)
