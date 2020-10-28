@@ -196,9 +196,7 @@ def build_sdist(py, upload=False):
         run(cmd)
         run(['pip', 'install', 'twine'])
         if upload:
-            #Commented for testing
-            print("Uploading tar")
-            #run(['twine', 'upload', 'dist/*'])
+            run(['twine', 'upload', 'dist/*'])
 
     return glob.glob(pjoin(repo_root, 'dist', '*.tar.gz'))[0]
 
@@ -238,9 +236,6 @@ def bdist(ctx, py, wheel=True):
     if wheel:
         cmd.append('bdist_wheel')
     cmd.append('--zmq=bundled')
-    print("Printing Wheel gen cmd")
-    print(cmd)
-    print("Printed Wheel gen cmd")
     run(cmd)
 
 
@@ -288,9 +283,6 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
             run(base_cmd +  " quay.io/pypa/manylinux1_x86_64 /io/build_pyzmqs.sh")
     if upload:
         with cd(manylinux):
-            run(['pwd'])
-            run(['ls', '-l'])
-            run(['ls', '-l', 'wheelhouse'])
             py = make_env(default_py, 'twine')
             run(['twine', 'upload', os.path.join(manylinux, 'wheelhouse', '*')])
 
@@ -298,10 +290,6 @@ def manylinux(ctx, vs, upload=False, pythons=manylinux_pys):
 @task
 def release(ctx, vs, upload=False):
     """Release pyzmq"""
-    print("Value of CTX: %s" % (ctx))
-    print("Value of VS: %s" % (vs))
-    print("Value of UPLOAD: %s" % (upload))
-    print("When AppVeyor finished building, upload artifacts with:")
     # Ensure all our Pythons exist before we start:
     for v, path in py_exes.items():
         if not os.path.exists(path):
@@ -313,20 +301,12 @@ def release(ctx, vs, upload=False):
         shutil.rmtree(env_root)
 
     path = sdist(ctx, vs, upload=upload)
-    print("PATH: %s" % (path))
-    run(['ls', '-l', path])
     with cd(path):
         for v in py_exes:
-            print("Printing PWD")
-            run(['pwd'])
-            print("------------------")
-            run(['ls', '-l'])
-            print("Printed PWD")
             bdist(ctx, v, wheel=True)
         if upload:
             py = make_env(default_py, 'twine')
-            # Commented to test
-            #run(['twine', 'upload', 'dist/*'])
+            run(['twine', 'upload', 'dist/*'])
 
     manylinux(ctx, vs, upload=upload)
     if upload:
