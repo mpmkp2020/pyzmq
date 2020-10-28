@@ -54,10 +54,7 @@ matrix:
   include:
     - python: 3.8
       env: ZMQ=bundled
-      arch: arm64-graviton2
-      dist: focal
-      virt: vm
-      group: edge
+      arch: arm64
       script: 
         - cd tools && invoke release 19.0.2 --upload
         #- cd ../ && travis_retry python setup.py test
